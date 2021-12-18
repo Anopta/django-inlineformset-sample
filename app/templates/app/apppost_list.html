@@ -3,7 +3,7 @@
 {% block content %}
 <a href="{% url 'app:add_post' %}" class="btn btn-primary">追加</a>
 <hr>
-{% for post in post_list %}
+{% for post in apppost_list %}
     <p><a href="{% url 'app:update_post' post.pk %}">{{ post.title }}</a></p>
 {% endfor %}
 

@@ -1,5 +1,5 @@
 from django import forms
-from .models import Post, File
+from .models import AppPost, AppItem
 
 
 class PostCreateForm(forms.ModelForm):
@@ -10,11 +10,11 @@ class PostCreateForm(forms.ModelForm):
             field.widget.attrs['class'] = 'form-control'
 
     class Meta:
-        model = Post
+        model = AppPost
         fields = '__all__'
 
 
 FileFormset = forms.inlineformset_factory(
-    Post, File, fields='__all__',
-    extra=5, max_num=5, can_delete=False
+    AppPost, AppItem, fields='__all__',
+    extra=3, can_delete=False
 )

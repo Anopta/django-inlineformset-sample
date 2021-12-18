@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import generic
 from .forms import PostCreateForm, FileFormset
-from .models import Post
+from .models import AppPost
 
 
 class PostList(generic.ListView):
-    model = Post
+    model = AppPost
 
 
 def add_post(request):
@@ -32,7 +32,7 @@ def add_post(request):
 
 
 def update_post(request, pk):
-    post = get_object_or_404(Post, pk=pk)
+    post = get_object_or_404(AppPost, pk=pk)
     form = PostCreateForm(request.POST or None, instance=post)
     formset = FileFormset(request.POST or None, files=request.FILES or None, instance=post)
     if request.method == 'POST' and form.is_valid() and formset.is_valid():
