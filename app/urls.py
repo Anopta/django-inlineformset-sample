@@ -4,7 +4,7 @@ from . import views
 app_name = 'app'
 
 urlpatterns = [
-    path('', views.PostList.as_view(), name='index'),
-    path('add/', views.add_post, name='add_post'),
-    path('update/<int:pk>/', views.update_post, name='update_post')
+    path('', views.ManagerAppView.as_view(), name='app'),
+    path('add/', views.ManagerAppAddView.as_view(), name='app_add'),
+    path('edit/<int:pk>/', views.ManagerAppEditView.as_view(), name='app_edit')
 ]

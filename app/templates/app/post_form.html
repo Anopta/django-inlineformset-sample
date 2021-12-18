@@ -1,42 +1,38 @@
 {% extends 'app/base.html' %}
+{% load widget_tweaks %}
 
 {% block content %}
-<!-- ファイルをあつかうので、enctype="multipart/form-data" が必要 -->
-<form action="" method="post" enctype="multipart/form-data">
-    <h2>記事</h2>
-    {{ form.as_p }}
-
-    <h2>添付ファイル</h2>
-    {{ formset.management_form }}
-    {% for file_form in formset %}
-        {{ file_form.as_p }}
-        <hr>
-    {% endfor %}
-
+<form action="" method="post">
     {% csrf_token %}
+    <div id="file-area">
+        <label>説明書名
+        {% render_field form.title class='form-control' placeholder='解約申し込み' %}</label>
+        <hr>
+        {{ formset.management_form }}
+        {% for form in formset %}
+            {{ form.item }}
+            {{ form.id }} 
+            <hr>
+        {% endfor %}
+    </div>
     <button type="submit" class="btn btn-primary">送信</button>
-    <button id="add" type="button" class="btn btn-primary">ファイルの追加</button>
+    <button id="add" type="button" class="btn btn-primary">フォームの追加</button>
 </form>
 {% endblock %}
 
 {% block extrajs %}
 <script>
 $(function(){
-    var totalManageElement = $('input#id_file_set-TOTAL_FORMS');
+    var totalManageElement = $('input#id_appitem_set-TOTAL_FORMS');
     var currentFileCount = parseInt(totalManageElement.val());
     $('button#add').on('click', function(){
         var nameElement = $('<input>', {
-            type: 'name',
-            name: 'file_set-' + currentFileCount + '-name',
-            id: 'id_file_set-' + currentFileCount + '-name',
-        });
-        var fileElement = $('<input>', {
-            type: 'file',
-            name: 'file_set-' + currentFileCount + '-src',
-            id: 'id_file_set-' + currentFileCount + '-src',
+            type: 'text',
+            name: 'appitem_set-' + currentFileCount + '-item',
+            maxlength: '255',
+            id: 'id_appitem_set-' + currentFileCount + '-item',
         });
         $('div#file-area').append(nameElement);
-        $('div#file-area').append(fileElement);
         currentFileCount += 1;
         totalManageElement.attr('value', currentFileCount);
     });

@@ -2,19 +2,12 @@ from django import forms
 from .models import AppPost, AppItem
 
 
-class PostCreateForm(forms.ModelForm):
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for field in self.fields.values():
-            field.widget.attrs['class'] = 'form-control'
-
-    class Meta:
-        model = AppPost
-        fields = '__all__'
+class ManagerAppForm(forms.Form):
+    title = forms.CharField(max_length=255, label='説明書名')
+    # item = forms.CharField(max_length=255, label='質問項目追加')
 
 
-FileFormset = forms.inlineformset_factory(
+ManagerAppFormset = forms.inlineformset_factory(
     AppPost, AppItem, fields='__all__',
-    extra=3, can_delete=False
+    extra=0, can_delete=False
 )

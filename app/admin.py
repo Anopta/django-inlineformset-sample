@@ -4,7 +4,7 @@ from .models import *
 
 class FileInline(admin.StackedInline):
     model = AppItem
-    extra = 3
+    extra = 0
 
 
 class AppPostAdmin(admin.ModelAdmin):

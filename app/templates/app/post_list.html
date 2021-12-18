@@ -1,0 +1,10 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+<a href="{% url 'app:app_add' %}" class="btn btn-primary">追加</a>
+<hr>
+{% for post in post_data %}
+    <p><a href="{% url 'app:app_edit' post.pk %}">{{ post.title }}</a></p>
+{% endfor %}
+
+{% endblock %}
