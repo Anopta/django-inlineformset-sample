@@ -8,4 +8,4 @@ class AppPost(models.Model):
 
 class AppItem(models.Model):
     item = models.CharField('質問項目追加', max_length=255)
-    post = models.ForeignKey(AppPost, verbose_name='紐づく投稿', blank=True, null=True, on_delete=models.SET_NULL)
+    post = models.ForeignKey(AppPost, verbose_name='紐づく投稿', blank=True, null=True, on_delete=models.CASCADE)
